@@ -14,16 +14,6 @@ type Task = {
   styleUrls: ['./app.component.scss']
 })
 
-
-
-
-// {
-//   id: v4(),
-//   name: 'lavar roupa'
-// }, {
-//   id: v4(),
-//   name: 'arrumar quarto'
-// }
 export class AppComponent {
   title = 'todo-app-angular';
   faTrash = faTrash;
