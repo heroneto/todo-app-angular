@@ -1,0 +1,46 @@
+<div class="bg-indigo-100 w-screen h-screen flex justify-center">
+  <div class="flex flex-col w-96 mt-10">
+    <app-header></app-header>
+    <div *ngIf="taskList.length > 0;then renderList else renderEmpty">
+    </div>
+    <ng-template #renderList>
+      <div class="bg-white mt-4 flex-col h-64">
+
+        <ul class="p-4">
+          <li *ngFor="let task of taskList">
+            <div class="flex items-center justify-between text-gray-500 font-semibold">
+              <div class="flex items-center">
+                <input class="w-4 h-4" type="checkbox" id="{{task.id}}" name="{{task.id}}" [(ngModel)]="task.checked" />
+                <label class="ml-2" for="{{task.id}}">{{task.name}}</label>
+              </div>
+              <fa-icon (click)="deleteTask(task.id)" class="cursor-pointer" [icon]="faTrash"></fa-icon>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </ng-template>
+    <ng-template #renderEmpty>
+      <div class="bg-white mt-4 flex-col h-64">
+        <div class="task-completed-image flex justify-center items-center h-full w-full">
+          <img src="./assets/empty_tasks.svg" />
+        </div>
+      </div>
+
+    </ng-template>
+
+
+    <div class="-mt-5">
+      <form class="w-full flex justify-center" [formGroup]="taskListForm" (ngSubmit)="addTask()">
+        <input class="bg-purple-400 w-3/4 text-white placeholder-white text-center p-2"
+          placeholder="Digite sua nova Task aqui..." type="text" formControlName="name" />
+      </form>
+    </div>
+    <div class="flex justify-center mt-5">
+      <button (click)="clearTasks()"
+        class="bg-red-600 px-10 py-2 rounded-3xl text-white font-semibold hover:brightness-110 duration-200">
+        Deletar todos
+      </button>
+    </div>
+  </div>
+</div>

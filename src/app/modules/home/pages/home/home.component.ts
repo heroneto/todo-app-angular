@@ -1,21 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+
+//external libs
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { v4 } from 'uuid'
+import { TaskList } from '../../model/task-list';
 
-type Task = {
-  id: string,
-  name: string
-}
+//intefaces
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   faTrash = faTrash;
-  taskList: Task[] = []
+  taskList: TaskList[] = []
 
   taskListForm = this.formBuilder.group({
     name: ''
@@ -24,6 +23,10 @@ export class HomeComponent {
   constructor(
     private formBuilder: FormBuilder
   ) {
+
+  }
+
+  ngOnInit() {
     const tasksFromStorage = JSON.parse(localStorage.getItem('taskList') || '[]')
     this.taskList = tasksFromStorage
   }
@@ -31,7 +34,8 @@ export class HomeComponent {
   addTask() {
     this.taskList.push({
       id: v4(),
-      name: this.taskListForm.value.name || ''
+      name: this.taskListForm.value.name || '',
+      checked: false
     })
     this.taskListForm.reset()
     localStorage.setItem('taskList', JSON.stringify(this.taskList))
