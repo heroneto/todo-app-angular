@@ -10,8 +10,9 @@
           <li *ngFor="let task of taskList">
             <div class="flex items-center justify-between text-gray-500 font-semibold">
               <div class="flex items-center">
-                <input class="w-4 h-4" type="checkbox" id="{{task.id}}" name="{{task.id}}" [(ngModel)]="task.checked" />
-                <label class="ml-2" for="{{task.id}}">{{task.name}}</label>
+                <input class="w-4 h-4" type="checkbox" id="{{task.id}}" name="{{task.id}}" [(ngModel)]="task.checked"
+                  (ngModelChange)="toggleCheckedTask(task.id)" />
+                <label [ngClass]="{'line-through': task.checked, 'ml-2': true}">{{task.name}}</label>
               </div>
               <fa-icon (click)="deleteTask(task.id)" class="cursor-pointer" [icon]="faTrash"></fa-icon>
             </div>

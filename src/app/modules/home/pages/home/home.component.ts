@@ -51,4 +51,18 @@ export class HomeComponent implements OnInit {
     this.taskList = []
     localStorage.setItem('taskList', JSON.stringify(this.taskList))
   }
+
+  toggleCheckedTask(id: string) {
+    const newTasks = this.taskList.reduce((acc: TaskList[], cur: TaskList) => {
+      if (cur.id === id) {
+        cur.checked = !!cur.checked
+        acc.push(cur)
+        return acc
+      }
+      acc.push(cur)
+      return acc
+    }, [])
+    this.taskList = newTasks
+    localStorage.setItem('taskList', JSON.stringify(this.taskList))
+  }
 }
