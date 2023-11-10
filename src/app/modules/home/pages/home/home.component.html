@@ -37,7 +37,7 @@
           placeholder="Digite sua nova Task aqui..." type="text" formControlName="name" />
       </form>
     </div>
-    <div class="flex justify-center mt-5">
+    <div *ngIf="taskList.length" class="flex justify-center mt-5">
       <button (click)="clearTasks()"
         class="bg-red-600 px-10 py-2 rounded-3xl text-white font-semibold hover:brightness-110 duration-200">
         Deletar todos
