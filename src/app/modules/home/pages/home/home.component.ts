@@ -62,6 +62,20 @@ export class HomeComponent implements OnInit {
       acc.push(cur)
       return acc
     }, [])
+    this.taskList = newTasks.sort((a, b) => Number(a.checked) - Number(b.checked))
+    localStorage.setItem('taskList', JSON.stringify(this.taskList))
+  }
+
+  changeTaskName(name: string, id: string) {
+    const newTasks = this.taskList.reduce((acc: TaskList[], cur: TaskList) => {
+      if (cur.id === id) {
+        cur.name = name
+        acc.push(cur)
+        return acc
+      }
+      acc.push(cur)
+      return acc
+    }, [])
     this.taskList = newTasks
     localStorage.setItem('taskList', JSON.stringify(this.taskList))
   }

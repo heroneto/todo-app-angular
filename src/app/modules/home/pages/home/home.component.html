@@ -12,7 +12,8 @@
               <div class="flex items-center">
                 <input class="w-4 h-4" type="checkbox" id="{{task.id}}" name="{{task.id}}" [(ngModel)]="task.checked"
                   (ngModelChange)="toggleCheckedTask(task.id)" />
-                <label [ngClass]="{'line-through': task.checked, 'ml-2': true}">{{task.name}}</label>
+                <input [ngClass]="{'line-through': task.checked, 'ml-2': true}" value="{{task.name}}"
+                  [(ngModel)]="task.name" (ngModelChange)="changeTaskName(task.name, task.id)" />
               </div>
               <fa-icon (click)="deleteTask(task.id)" class="cursor-pointer" [icon]="faTrash"></fa-icon>
             </div>
